@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpi242o2w5q1t"]
+
+[ext_resource type="Script" path="res://Scripts/NodeCall/counter_manager.gd" id="1_6kwog"]
+[ext_resource type="Script" path="res://Scripts/NodeCall/static_player.gd" id="2_t8xoj"]
+
+[node name="NodeCall" type="Node2D"]
+
+[node name="CounterManager" type="Node" parent="."]
+script = ExtResource("1_6kwog")
+
+[node name="Counter" type="Label" parent="CounterManager"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Left Click: Right Click:"
+
+[node name="StaticPlayer" type="Node" parent="."]
+script = ExtResource("2_t8xoj")

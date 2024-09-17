@@ -1,0 +1,10 @@
+If the player enters the area on an interactable node like an NPC
+	If the play interacts with it
+		Then the DialogueCanvas appears
+		hen Load the Dialogue
+		
+DialogueCanvasAppear
+	Put Animation to show the Labels and everything
+	
+Dialogue Load
+	Show the Name: and Chat: of the NPC and yer done

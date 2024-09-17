@@ -1,0 +1,30 @@
+{
+	"npc1": [
+		{
+			"id": 1,
+			"name": "NPC 1",
+			"text": "Hello, traveler! Welcome to our village.",
+			"next": 2
+		},
+		{
+			"id": 2,
+			"name": "NPC 1",
+			"text": "Feel free to explore and talk to everyone.",
+			"next": null
+		}
+	],
+		"npc2": [
+		{
+			"id": 1,
+			"name": "NPC 2",
+			"text": "Oi Slimy Face! What are ye lookin' at?",
+			"next": 2
+		},
+		{
+			"id": 2,
+			"name": "NPC 2",
+			"text": "Stay away from my yard or you'll get it.",
+			"next": null
+		}
+	]
+}
