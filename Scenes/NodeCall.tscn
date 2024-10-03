@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dpi242o2w5q1t"]
+[gd_scene load_steps=4 format=3 uid="uid://dpi242o2w5q1t"]
 
 [ext_resource type="Script" path="res://Scripts/NodeCall/counter_manager.gd" id="1_6kwog"]
 [ext_resource type="Script" path="res://Scripts/NodeCall/static_player.gd" id="2_t8xoj"]
+[ext_resource type="PackedScene" uid="uid://bhavvou8ndhap" path="res://Scenes/HealthBar.tscn" id="3_e36bu"]
 
 [node name="NodeCall" type="Node2D"]
 
@@ -13,5 +14,7 @@ offset_right = 40.0
 offset_bottom = 23.0
 text = "Left Click: Right Click:"
 
-[node name="StaticPlayer" type="Node" parent="."]
+[node name="StaticPlayer" type="Node" parent="." node_paths=PackedStringArray("counter_manager")]
 script = ExtResource("2_t8xoj")
+health_bar_scene = ExtResource("3_e36bu")
+counter_manager = NodePath("../CounterManager")

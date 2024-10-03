@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=3 uid="uid://12syfkn5ffne"]
+
+[ext_resource type="Script" path="res://Scripts/Settings/settings.gd" id="1_rwdlr"]
+[ext_resource type="AudioStream" uid="uid://bji3g401yyae1" path="res://Audio/bgm_sample.wav" id="2_wqk2v"]
+[ext_resource type="AudioStream" uid="uid://bhmw0yj7h1rnj" path="res://Audio/sfx_sample.wav" id="3_qk8gn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pxpo7"]
+bg_color = Color(0, 0, 0, 1)
+border_width_top = 1
+border_color = Color(0, 0, 0, 1)
+expand_margin_top = 1.0
+expand_margin_bottom = 1.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_u7h5q"]
+bg_color = Color(1, 1, 1, 1)
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_45a20"]
+bg_color = Color(3.17663e-06, 0.701263, 0.569381, 1)
+
+[node name="Settings" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rwdlr")
+bus_name_bgm = "bgm"
+bus_name_sfx = "sfx"
+
+[node name="HSlider" type="HSlider" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -20.0
+offset_right = 71.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/slider = SubResource("StyleBoxFlat_pxpo7")
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_u7h5q")
+max_value = 1.0
+step = 0.001
+value = 1.0
+
+[node name="HSlider2" type="HSlider" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.5
+offset_top = 3.0
+offset_right = 70.5
+offset_bottom = 19.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+step = 0.001
+
+[node name="ProgressBar" type="ProgressBar" parent="Control"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 11.0
+offset_top = 33.0
+offset_right = -10.0
+offset_bottom = 37.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_45a20")
+show_percentage = false
+
+[node name="BGM" type="AudioStreamPlayer" parent="Control"]
+stream = ExtResource("2_wqk2v")
+autoplay = true
+bus = &"bgm"
+
+[node name="SFX" type="AudioStreamPlayer" parent="Control"]
+stream = ExtResource("3_qk8gn")
+autoplay = true
+bus = &"sfx"
+
+[connection signal="value_changed" from="Control/HSlider" to="Control" method="_on_value_changed_bgm"]
+[connection signal="value_changed" from="Control/HSlider2" to="Control" method="_on_value_changed_sfx"]
