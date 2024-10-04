@@ -1,0 +1,130 @@
+[gd_scene load_steps=7 format=3 uid="uid://33p53xhou2cp"]
+
+[ext_resource type="Script" path="res://Scripts/QuadWalker/quad_walker.gd" id="1_1jcs0"]
+[ext_resource type="Texture2D" uid="uid://be0q6b0labdgy" path="res://Sprites/QuadWalker/dominator_packed.png" id="2_4kted"]
+[ext_resource type="Script" path="res://Scripts/QuadWalker/top_level.gd" id="3_oifie"]
+[ext_resource type="Script" path="res://Scripts/QuadWalker/pod_container.gd" id="3_vjft6"]
+[ext_resource type="Script" path="res://Scripts/QuadWalker/line_pod.gd" id="5_rmlac"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_74c3s"]
+radius = 8.0
+
+[node name="QuadWalker" type="CharacterBody2D" node_paths=PackedStringArray("pod1", "pod2", "pod3", "pod4", "marker1", "marker2", "marker3", "marker4")]
+position = Vector2(962, 545)
+script = ExtResource("1_1jcs0")
+pod1 = NodePath("Pod/Pod1")
+pod2 = NodePath("Pod/Pod2")
+pod3 = NodePath("Pod/Pod3")
+pod4 = NodePath("Pod/Pod4")
+marker1 = NodePath("PodMarker/Marker1")
+marker2 = NodePath("PodMarker/Marker2")
+marker3 = NodePath("PodMarker/Marker3")
+marker4 = NodePath("PodMarker/Marker4")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(5, 5)
+
+[node name="BaseCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_74c3s")
+
+[node name="Base" type="Sprite2D" parent="."]
+texture = ExtResource("2_4kted")
+region_enabled = true
+region_rect = Rect2(0, 0, 20, 19)
+
+[node name="PodMarker" type="Node2D" parent="."]
+
+[node name="Marker1" type="Marker2D" parent="PodMarker"]
+position = Vector2(-14, -14)
+
+[node name="Marker2" type="Marker2D" parent="PodMarker"]
+position = Vector2(14, -14)
+
+[node name="Marker3" type="Marker2D" parent="PodMarker"]
+position = Vector2(14, 14)
+
+[node name="Marker4" type="Marker2D" parent="PodMarker"]
+position = Vector2(-14, 14)
+
+[node name="Pod" type="Node2D" parent="."]
+
+[node name="Pod1" type="Sprite2D" parent="Pod" node_paths=PackedStringArray("step_target", "adjacent_target")]
+position = Vector2(-14, -14)
+texture = ExtResource("2_4kted")
+region_enabled = true
+region_rect = Rect2(21, 6, 7, 7)
+script = ExtResource("3_oifie")
+step_target = NodePath("../../Marker/Marker1")
+adjacent_target = NodePath("../Pod2")
+
+[node name="Pod2" type="Sprite2D" parent="Pod" node_paths=PackedStringArray("step_target", "adjacent_target")]
+position = Vector2(14, -14)
+texture = ExtResource("2_4kted")
+region_enabled = true
+region_rect = Rect2(21, 6, 7, 7)
+script = ExtResource("3_oifie")
+step_target = NodePath("../../Marker/Marker2")
+adjacent_target = NodePath("../Pod1")
+
+[node name="Pod3" type="Sprite2D" parent="Pod" node_paths=PackedStringArray("step_target", "adjacent_target")]
+position = Vector2(14, 14)
+texture = ExtResource("2_4kted")
+region_enabled = true
+region_rect = Rect2(21, 6, 7, 7)
+script = ExtResource("3_oifie")
+step_target = NodePath("../../Marker/Marker3")
+adjacent_target = NodePath("../Pod4")
+
+[node name="Pod4" type="Sprite2D" parent="Pod" node_paths=PackedStringArray("step_target", "adjacent_target")]
+position = Vector2(-14, 14)
+texture = ExtResource("2_4kted")
+region_enabled = true
+region_rect = Rect2(21, 6, 7, 7)
+script = ExtResource("3_oifie")
+step_target = NodePath("../../Marker/Marker4")
+adjacent_target = NodePath("../Pod3")
+
+[node name="Marker" type="Node2D" parent="."]
+script = ExtResource("3_vjft6")
+
+[node name="Marker1" type="Marker2D" parent="Marker"]
+position = Vector2(-14, -14)
+
+[node name="Marker2" type="Marker2D" parent="Marker"]
+position = Vector2(14, -14)
+
+[node name="Marker3" type="Marker2D" parent="Marker"]
+position = Vector2(14, 14)
+
+[node name="Marker4" type="Marker2D" parent="Marker"]
+position = Vector2(-14, 14)
+
+[node name="LegLine" type="Node2D" parent="."]
+
+[node name="LinePod1" type="Line2D" parent="LegLine" node_paths=PackedStringArray("base", "target", "line")]
+width = 4.0
+script = ExtResource("5_rmlac")
+base = NodePath("../../Base")
+target = NodePath("../../PodMarker/Marker1")
+line = NodePath(".")
+
+[node name="LinePod2" type="Line2D" parent="LegLine" node_paths=PackedStringArray("base", "target", "line")]
+width = 4.0
+script = ExtResource("5_rmlac")
+base = NodePath("../../Base")
+target = NodePath("../../PodMarker/Marker2")
+line = NodePath(".")
+
+[node name="LinePod3" type="Line2D" parent="LegLine" node_paths=PackedStringArray("base", "target", "line")]
+width = 4.0
+script = ExtResource("5_rmlac")
+base = NodePath("../../Base")
+target = NodePath("../../PodMarker/Marker3")
+line = NodePath(".")
+
+[node name="LinePod4" type="Line2D" parent="LegLine" node_paths=PackedStringArray("base", "target", "line")]
+width = 4.0
+script = ExtResource("5_rmlac")
+base = NodePath("../../Base")
+target = NodePath("../../PodMarker/Marker4")
+line = NodePath(".")
