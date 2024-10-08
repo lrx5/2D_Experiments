@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://duma7p0mj43iv"]
+
+[ext_resource type="Script" path="res://Scripts/TowerDefense/cannon_one.gd" id="1_xbstv"]
+[ext_resource type="PackedScene" uid="uid://bs1haonww68w6" path="res://Scenes/TowerDefense/SubScenes/cannon_bullet_one.tscn" id="2_b64pd"]
+[ext_resource type="Texture2D" uid="uid://cr7hkthcmxiq3" path="res://Sprites/TowerDefense/towerDefense_tilesheet.png" id="3_a1v8x"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2kskn"]
+radius = 256.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wcr2s"]
+size = Vector2(64, 64)
+
+[node name="CannonOne" type="Node2D"]
+script = ExtResource("1_xbstv")
+bullet_scene = ExtResource("2_b64pd")
+
+[node name="CannonBase" type="Sprite2D" parent="."]
+texture = ExtResource("3_a1v8x")
+region_enabled = true
+region_rect = Rect2(1216, 448, 64, 64)
+
+[node name="CannonTurret" type="Sprite2D" parent="CannonBase"]
+texture = ExtResource("3_a1v8x")
+offset = Vector2(0, -11)
+region_enabled = true
+region_rect = Rect2(1216, 640, 64, 64)
+
+[node name="TowerRange" type="Area2D" parent="."]
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TowerRange"]
+shape = SubResource("CircleShape2D_2kskn")
+
+[node name="ClickArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ClickArea"]
+shape = SubResource("RectangleShape2D_wcr2s")
+
+[node name="ShootTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="body_entered" from="TowerRange" to="." method="_on_tower_range_body_entered"]
+[connection signal="body_exited" from="TowerRange" to="." method="_on_tower_range_body_exited"]
+[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]

@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bu7ilcbp1ok33"]
+
+[ext_resource type="Script" path="res://Scripts/TowerDefense/enemy.gd" id="1_o0d2t"]
+[ext_resource type="Texture2D" uid="uid://cr7hkthcmxiq3" path="res://Sprites/TowerDefense/towerDefense_tilesheet.png" id="2_7la3i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kb33t"]
+size = Vector2(19, 26)
+
+[node name="PathFollow2D" type="PathFollow2D"]
+position = Vector2(417, -31)
+rotation = 1.5708
+loop = false
+
+[node name="Enemy" type="CharacterBody2D" parent="."]
+collision_layer = 256
+collision_mask = 8
+script = ExtResource("1_o0d2t")
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy"]
+texture = ExtResource("2_7la3i")
+region_enabled = true
+region_rect = Rect2(960, 640, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_kb33t")

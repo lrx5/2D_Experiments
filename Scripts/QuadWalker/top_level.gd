@@ -1,7 +1,7 @@
 extends Sprite2D
 
 @export var step_target: Marker2D
-@export var step_distance: float = 20.0
+@export var step_distance: float = 10.0
 @export var adjacent_target: Sprite2D
 
 var is_stepping = false

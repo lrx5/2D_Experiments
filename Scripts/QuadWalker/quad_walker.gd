@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var marker3 = Marker2D
 @export var marker4 = Marker2D
 
-@export var speed: float = 10.0
+@export var speed: float = 5.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
