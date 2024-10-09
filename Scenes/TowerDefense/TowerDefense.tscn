@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=4 uid="uid://b8i1tvbm7w2bt"]
+[gd_scene load_steps=10 format=4 uid="uid://b8i1tvbm7w2bt"]
 
 [ext_resource type="Texture2D" uid="uid://cr7hkthcmxiq3" path="res://Sprites/TowerDefense/towerDefense_tilesheet.png" id="1_3a50u"]
 [ext_resource type="PackedScene" uid="uid://bu7ilcbp1ok33" path="res://Scenes/TowerDefense/SubScenes/soldier_enemy.tscn" id="2_6ldis"]
 [ext_resource type="PackedScene" uid="uid://duma7p0mj43iv" path="res://Scenes/TowerDefense/SubScenes/cannon_one.tscn" id="4_d088t"]
+[ext_resource type="PackedScene" uid="uid://dm6m0fli0c8t1" path="res://Scenes/TowerDefense/SubScenes/armored_enemy.tscn" id="5_5uaf0"]
 [ext_resource type="Script" path="res://Scripts/TowerDefense/enemy_spawner.gd" id="5_i6c50"]
+[ext_resource type="Script" path="res://Scripts/TowerDefense/tower_ui.gd" id="6_da7ak"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xi64k"]
 texture = ExtResource("1_3a50u")
@@ -333,4 +335,38 @@ position = Vector2(608, 352)
 
 [node name="EnemySpawner" type="Node" parent="."]
 script = ExtResource("5_i6c50")
-enemy_scene = ExtResource("2_6ldis")
+soldier_scene = ExtResource("2_6ldis")
+armored_scene = ExtResource("5_5uaf0")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TowerUI" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("6_da7ak")
+label = NodePath("Panel/Label")
+
+[node name="Panel" type="Panel" parent="CanvasLayer/TowerUI"]
+layout_mode = 0
+offset_right = 142.0
+offset_bottom = 34.0
+
+[node name="Label" type="Label" parent="CanvasLayer/TowerUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+text = "FIRST"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="gui_input" from="CanvasLayer/TowerUI/Panel/Label" to="CanvasLayer/TowerUI" method="_on_label_gui_input"]
+[connection signal="mouse_entered" from="CanvasLayer/TowerUI/Panel/Label" to="CanvasLayer/TowerUI" method="_on_label_mouse_entered"]
+[connection signal="mouse_exited" from="CanvasLayer/TowerUI/Panel/Label" to="CanvasLayer/TowerUI" method="_on_label_mouse_exited"]
