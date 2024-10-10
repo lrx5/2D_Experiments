@@ -5,9 +5,9 @@ extends Node2D
 
 enum TargetingMode {
 	TARGET_FIRST,
+	TARGET_LAST,
 	TARGET_HIGHEST_HP,
-	TARGET_LOWEST_HP,
-	TARGET_LAST}
+	TARGET_LOWEST_HP,}
 
 var current_target: CharacterBody2D
 var direction
@@ -74,12 +74,12 @@ func find_next_target() -> void:
 		match targeting_mode:
 			TargetingMode.TARGET_FIRST:
 				current_target = get_first_enemy()
+			TargetingMode.TARGET_LAST:
+				current_target = get_last_enemy()
 			TargetingMode.TARGET_HIGHEST_HP:
 				current_target = get_highest_hp_enemy()
 			TargetingMode.TARGET_LOWEST_HP:
 				current_target = get_lowest_hp_enemy()
-			TargetingMode.TARGET_LAST:
-				current_target = get_last_enemy()
 	else:
 		current_target = null
 		enemy_in_range = false
